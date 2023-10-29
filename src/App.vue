@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
@@ -7,7 +9,10 @@
     <div class="white-bg">
       <button class="closeModal" @click="changeModal=false">X</button>
       <h4>상세페이지</h4>
-      <p>상세페이지 내용</p>
+      <img :src="products[target].image" style="height: 80%;">
+      <p>{{products[target].title}}</p>
+      <p>{{products[target].content}}</p>
+      <p>{{products[target].price}}</p>
     </div>
   </div>
 
@@ -34,27 +39,34 @@
     <button @click="increaseReport(2)">허위매물신고</button>
     <span>신고수 : {{ 신고수[2] }}</span>
   </div>-->
-  <div v-for="(a,i) in products" :key="i" @click="changeModal=true">
+<!--  <div v-for="(a,i) in products" :key="i" @click="changeModal=true">
     <img :src="require(`@/assets/room${i}.jpg`)" class="room-img">
     <h4 class="rooms" :style="스타일">{{ products[i] }}</h4>
     <p>{{ prices[i] }} 만원</p>
     <button @click="increaseReport(i)">허위매물신고</button>
     <span>신고수 : {{ 신고수[i] }}</span>
+  </div>-->
+  <div v-for="(a,i) in products" :key="i" @click="changeModal=true; target=i">
+    <img :src="a.image" class="room-img">
+    <h4>{{a.title}}</h4>
+    <p>{{a.price}}</p>
   </div>
 
 </template>
 
 <script>
 
-
+import products from './assets/oneroom';
 export default {
   name: 'App',
   data() {
     return {
+      target : 0,
+      products : products,
       changeModal: false,
       신고수: [0, 0, 0],
       menus: ['Home', 'Shop', 'About'],
-      products: ['역삼동원룸', '천호동원룸', '마포구원룸'],
+      /*products: ['역삼동원룸', '천호동원룸', '마포구원룸'],*/
       prices: [100, 40, 80],
       스타일: 'color:blue',
     }
@@ -77,6 +89,14 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+body {
+  margin: 0
+}
+
+div {
+  box-sizing: border-box;
+}
+
 
 .closeModal {
   border-radius: 5px;
@@ -87,13 +107,6 @@ export default {
   align-self: flex-end;
 }
 
-body {
-  margin: 0
-}
-
-div {
-  box-sizing: border-box;
-}
 
 .black-bg {
   width: 100%;
@@ -105,12 +118,14 @@ div {
 
 .white-bg {
   width: 100%;
+  height: 95%;
   background: white;
   border-radius: 8px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
 }
 
 .menu {
