@@ -5,16 +5,9 @@
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
 
-  <div class="black-bg" v-if="changeModal==true">
-    <div class="white-bg">
-      <button class="closeModal" @click="changeModal=false">X</button>
-      <h4>상세페이지</h4>
-      <img :src="products[target].image" style="height: 80%;">
-      <p>{{products[target].title}}</p>
-      <p>{{products[target].content}}</p>
-      <p>{{products[target].price}}</p>
-    </div>
-  </div>
+  <DiscountComponent/>
+  <ModalComponent/>
+
 
   <img alt="Vue logo" src="./assets/logo.png">
   <h1>허위매물 뷰동산</h1>
@@ -57,6 +50,8 @@
 <script>
 
 import products from './assets/oneroom';
+import DiscountComponent from "@/Discount.vue";
+import ModalComponent from "@/Modal.vue";
 export default {
   name: 'App',
   data() {
@@ -77,7 +72,7 @@ export default {
     }
   },
 
-  components: {}
+  components: {ModalComponent, DiscountComponent}
 }
 </script>
 
@@ -97,6 +92,12 @@ div {
   box-sizing: border-box;
 }
 
+.discount{
+  background: #eee;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
 
 .closeModal {
   border-radius: 5px;
