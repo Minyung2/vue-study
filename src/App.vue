@@ -1,17 +1,20 @@
-
-
 <template>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
 
   <DiscountComponent/>
-  <ModalComponent @closeModal="modalStatus=false" :products="products" :target="target" v-model:modalStatus="modalStatus"/>
+
+  <transition name="fade">
+    <ModalComponent @closeModal="modalStatus=false" :products="products" :target="target"
+                    v-model:modalStatus="modalStatus"/>
+  </transition>
 
 
   <img alt="Vue logo" src="./assets/logo.png">
   <h1>허위매물 Vue동산</h1>
-  <ProductCard :product="products[i]" @openModal="modalStatus = true; target = $event"  v-for="(product,i) in products" :key="i"/>
+  <ProductCard :product="products[i]" @openModal="modalStatus = true; target = $event" v-for="(product,i) in products"
+               :key="i"/>
 </template>
 
 <script>
@@ -20,12 +23,13 @@ import products from './assets/oneroom';
 import DiscountComponent from "@/Discount.vue";
 import ModalComponent from "@/Modal.vue";
 import ProductCard from "@/Card.vue";
+
 export default {
   name: 'App',
   data() {
     return {
-      target : 0,
-      products : products,
+      target: 0,
+      products: products,
       modalStatus: false,
       신고수: [0, 0, 0],
       menus: ['Home', 'Shop', 'About'],
@@ -52,6 +56,27 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+.fade-enter-from{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: all 1s;
+}
+.fade-enter-to{
+  opacity: 1;
+}
+.fade-leave-from{
+  opacity: 1;
+}
+.fade-leave-active{
+  transition: all 1s;
+}
+.fade-leave-to{
+  opacity: 0;
+}
+
+
 body {
   margin: 0
 }
@@ -60,7 +85,7 @@ div {
   box-sizing: border-box;
 }
 
-.discount{
+.discount {
   background: #eee;
   padding: 10px;
   margin-top: 10px;
