@@ -11,7 +11,7 @@
 
   <img alt="Vue logo" src="./assets/logo.png">
   <h1>허위매물 Vue동산</h1>
-  <ProductCard :product="products[i]" v-model:modalStatus="modalStatus" v-for="(product,i) in products" :key="i"/>
+  <ProductCard :product="products[i]" @openModal="modalStatus = true; target = $event"  v-for="(product,i) in products" :key="i"/>
 </template>
 
 <script>

@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     openModal() {
-      this.$emit('update:modalStatus', true);
+      this.$emit('openModal', this.product.id);
     }
   }
 }
