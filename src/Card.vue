@@ -1,8 +1,8 @@
 <template>
-  <div v-for="(a,i) in products" :key="i" @click="openModal(); target=i">
-    <img :src="a.image" class="room-img">
-    <h4>{{a.title}}</h4>
-    <p>{{a.price}}</p>
+  <div @click="openModal">
+    <img :src="product.image" class="room-img">
+    <h4>{{product.title}}</h4>
+    <p>{{product.price}}</p>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 export default {
   name: 'ProductCard',
   props :{
-    products : Array,
+    product : Object,
     modalStatus : Boolean,
   },
   methods: {

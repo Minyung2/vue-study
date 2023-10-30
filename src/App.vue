@@ -10,37 +10,8 @@
 
 
   <img alt="Vue logo" src="./assets/logo.png">
-  <h1>허위매물 뷰동산</h1>
-<!--  <div @click="modalStatus=true">
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4 class="rooms" :style="스타일">{{ products[0] }}</h4>
-    <p>{{ prices[0] }} 만원</p>
-    <button @click="increaseReport(0)">허위매물신고</button>
-    <span>신고수 : {{ 신고수[0] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room1.jpg" class="room-img">
-    <h4 class="rooms" :style="스타일">{{ products[1] }}</h4>
-    <p>{{ prices.at(1) }} 만원</p>
-    <button @click="increaseReport(1)">허위매물신고</button>
-    <span>신고수 : {{ 신고수[1] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room2.jpg" class="room-img">
-    <h4 class="rooms" :style="스타일">{{ products[2] }}</h4>
-    <p>{{ prices.at(2) }} 만원</p>
-    <button @click="increaseReport(2)">허위매물신고</button>
-    <span>신고수 : {{ 신고수[2] }}</span>
-  </div>-->
-<!--  <div v-for="(a,i) in products" :key="i" @click="modalStatus=true">
-    <img :src="require(`@/assets/room${i}.jpg`)" class="room-img">
-    <h4 class="rooms" :style="스타일">{{ products[i] }}</h4>
-    <p>{{ prices[i] }} 만원</p>
-    <button @click="increaseReport(i)">허위매물신고</button>
-    <span>신고수 : {{ 신고수[i] }}</span>
-  </div>-->
-  <ProductCard :products="products" v-model:modalStatus="modalStatus"/>
-
+  <h1>허위매물 Vue동산</h1>
+  <ProductCard :product="products[i]" v-model:modalStatus="modalStatus" v-for="(product,i) in products" :key="i"/>
 </template>
 
 <script>
