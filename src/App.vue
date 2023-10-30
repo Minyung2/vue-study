@@ -6,7 +6,7 @@
   </div>
 
   <DiscountComponent/>
-  <ModalComponent :products="products" :target="target" v-model:modalStatus="modalStatus"/>
+  <ModalComponent @closeModal="modalStatus=false" :products="products" :target="target" v-model:modalStatus="modalStatus"/>
 
 
   <img alt="Vue logo" src="./assets/logo.png">
@@ -87,7 +87,7 @@ div {
 
 .white-bg {
   width: 100%;
-  height: 95%;
+  height: 80%;
   background: white;
   border-radius: 8px;
   padding: 20px;
