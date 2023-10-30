@@ -6,12 +6,12 @@
   </div>
 
   <DiscountComponent/>
-  <ModalComponent/>
+  <ModalComponent :products="products" :target="target" v-model:modalStatus="modalStatus"/>
 
 
   <img alt="Vue logo" src="./assets/logo.png">
   <h1>허위매물 뷰동산</h1>
-<!--  <div @click="changeModal=true">
+<!--  <div @click="modalStatus=true">
     <img src="./assets/room0.jpg" class="room-img">
     <h4 class="rooms" :style="스타일">{{ products[0] }}</h4>
     <p>{{ prices[0] }} 만원</p>
@@ -32,18 +32,14 @@
     <button @click="increaseReport(2)">허위매물신고</button>
     <span>신고수 : {{ 신고수[2] }}</span>
   </div>-->
-<!--  <div v-for="(a,i) in products" :key="i" @click="changeModal=true">
+<!--  <div v-for="(a,i) in products" :key="i" @click="modalStatus=true">
     <img :src="require(`@/assets/room${i}.jpg`)" class="room-img">
     <h4 class="rooms" :style="스타일">{{ products[i] }}</h4>
     <p>{{ prices[i] }} 만원</p>
     <button @click="increaseReport(i)">허위매물신고</button>
     <span>신고수 : {{ 신고수[i] }}</span>
   </div>-->
-  <div v-for="(a,i) in products" :key="i" @click="changeModal=true; target=i">
-    <img :src="a.image" class="room-img">
-    <h4>{{a.title}}</h4>
-    <p>{{a.price}}</p>
-  </div>
+  <ProductCard :products="products" v-model:modalStatus="modalStatus"/>
 
 </template>
 
@@ -52,13 +48,14 @@
 import products from './assets/oneroom';
 import DiscountComponent from "@/Discount.vue";
 import ModalComponent from "@/Modal.vue";
+import ProductCard from "@/Card.vue";
 export default {
   name: 'App',
   data() {
     return {
       target : 0,
       products : products,
-      changeModal: false,
+      modalStatus: false,
       신고수: [0, 0, 0],
       menus: ['Home', 'Shop', 'About'],
       /*products: ['역삼동원룸', '천호동원룸', '마포구원룸'],*/
@@ -72,7 +69,7 @@ export default {
     }
   },
 
-  components: {ModalComponent, DiscountComponent}
+  components: {ProductCard, ModalComponent, DiscountComponent}
 }
 </script>
 
