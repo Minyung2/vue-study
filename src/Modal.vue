@@ -21,7 +21,7 @@ export default {
       month : 1,
     }
   },
-  watch: {
+  /*watch: {
     month(a) {
       if (a && !/^\d+$/.test(a)) {
         alert('숫자만 입력하세요');
@@ -31,13 +31,21 @@ export default {
         this.month=1;
       }
     }
+  },*/
+  beforeUpdate() {
+    if(this.month&& !/^\d+$/.test(this.month)){
+      alert('숫자만 입력하세요');
+      this.month=1;
+    }else if(this.month > 13){
+      alert('13미만만 입력하세요');
+      this.month=1;
+    }
   },
   props: {
     products: Array,
     target: Number,
     modalStatus: Boolean,
   },
-
 }
 </script>
 

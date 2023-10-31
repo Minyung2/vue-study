@@ -3,7 +3,7 @@
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
 
-  <DiscountComponent/>
+  <DiscountComponent :discountRate="discountRate" v-if="showDiscount==true"/>
   <button @click="priceSort">가격순 정렬</button>
   <button @click="resetSort">되돌리기</button>
 
@@ -27,12 +27,15 @@ import DiscountComponent from "@/Discount.vue";
 import ModalComponent from "@/Modal.vue";
 import ProductCard from "@/Card.vue";
 
+
 export default {
   name: 'App',
   data() {
     return {
+      discountRate: 30,
+      showDiscount: true,
       target: 0,
-      originalProducts : [...products],
+      originalProducts: [...products],
       products: products,
       modalStatus: false,
       신고수: [0, 0, 0],
@@ -46,16 +49,24 @@ export default {
     increaseReport(index) {
       this.신고수[index]++;
     },
-    priceSort(){
-      this.products.sort(function (a,b){
+    priceSort() {
+      this.products.sort(function (a, b) {
         return a.price - b.price;
       });
     },
-    resetSort(){
+    resetSort() {
       return this.products = [...this.originalProducts];
     },
   },
-
+  mounted() {
+    setInterval(()=>{
+      if(this.discountRate==0){
+        this.showDiscount=false;
+      }else {
+        this.discountRate--;
+      }
+    },1000);
+  },
   components: {ProductCard, ModalComponent, DiscountComponent}
 }
 </script>
@@ -69,22 +80,27 @@ export default {
   color: #2c3e50;
 }
 
-.fade-enter-from{
+.fade-enter-from {
   opacity: 0;
 }
-.fade-enter-active{
+
+.fade-enter-active {
   transition: all 1s;
 }
-.fade-enter-to{
+
+.fade-enter-to {
   opacity: 1;
 }
-.fade-leave-from{
+
+.fade-leave-from {
   opacity: 1;
 }
-.fade-leave-active{
+
+.fade-leave-active {
   transition: all 1s;
 }
-.fade-leave-to{
+
+.fade-leave-to {
   opacity: 0;
 }
 
