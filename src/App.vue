@@ -4,6 +4,9 @@
   </div>
 
   <DiscountComponent/>
+  <button @click="priceSort">가격순 정렬</button>
+  <button @click="resetSort">되돌리기</button>
+
 
   <transition name="fade">
     <ModalComponent @closeModal="modalStatus=false" :products="products" :target="target"
@@ -29,6 +32,7 @@ export default {
   data() {
     return {
       target: 0,
+      originalProducts : [...products],
       products: products,
       modalStatus: false,
       신고수: [0, 0, 0],
@@ -41,7 +45,15 @@ export default {
   methods: {
     increaseReport(index) {
       this.신고수[index]++;
-    }
+    },
+    priceSort(){
+      this.products.sort(function (a,b){
+        return a.price - b.price;
+      });
+    },
+    resetSort(){
+      return this.products = [...this.originalProducts];
+    },
   },
 
   components: {ProductCard, ModalComponent, DiscountComponent}
